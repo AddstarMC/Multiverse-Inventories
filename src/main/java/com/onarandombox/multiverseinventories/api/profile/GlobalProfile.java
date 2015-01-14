@@ -1,6 +1,7 @@
 package com.onarandombox.multiverseinventories.api.profile;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The global profile for a player.  This is where Multiverse-Inventories stores meta-data for players.
@@ -10,7 +11,12 @@ public interface GlobalProfile {
     /**
      * @return The name of the player.
      */
-    String getName();
+    //String getName();
+
+    /**
+     * @return The UUID of the player.
+     */
+    UUID getUniqueId();
 
     /**
      * @return The last world the player was in.

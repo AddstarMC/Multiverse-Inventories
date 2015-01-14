@@ -9,6 +9,7 @@ import com.onarandombox.multiverseinventories.api.profile.ProfileType;
 import com.onarandombox.multiverseinventories.api.share.ProfileEntry;
 import com.onarandombox.multiverseinventories.api.share.Sharable;
 import com.onarandombox.multiverseinventories.util.MinecraftTools;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
@@ -19,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 
 /**
@@ -47,8 +49,8 @@ class DefaultPlayerProfile implements PlayerProfile {
         inventoryContents = MinecraftTools.fillWithAir(inventoryContents);
     }
 
-    public DefaultPlayerProfile(ContainerType containerType, String containerName, ProfileType profileType, String playerName, Map playerData) {
-        this(containerType, containerName, profileType, Bukkit.getOfflinePlayer(playerName));
+    public DefaultPlayerProfile(ContainerType containerType, String containerName, ProfileType profileType, UUID playerUUID, Map playerData) {
+        this(containerType, containerName, profileType, Bukkit.getOfflinePlayer(playerUUID));
         for (Object keyObj : playerData.keySet()) {
             String key = keyObj.toString();
             if (key.equalsIgnoreCase(DataStrings.PLAYER_STATS)) {
@@ -59,12 +61,12 @@ class DefaultPlayerProfile implements PlayerProfile {
                     if (statsObject instanceof Map) {
                         parsePlayerStats((Map) statsObject);
                     } else {
-                        Logging.warning("Could not parse stats for " + playerName);
+                        Logging.warning("Could not parse stats for " + playerUUID);
                     }
                 }
             } else {
                 if (playerData.get(key) == null) {
-                    Logging.fine("Player data '" + key + "' is null for: " + playerName);
+                    Logging.fine("Player data '" + key + "' is null for: " + playerUUID);
                     continue;
                 }
                 try {
@@ -81,7 +83,7 @@ class DefaultPlayerProfile implements PlayerProfile {
                 }
             }
         }
-        Logging.finer("Created player profile from map for '" + playerName + "'.");
+        Logging.finer("Created player profile from map for '" + playerUUID + "'.");
     }
 
     /**

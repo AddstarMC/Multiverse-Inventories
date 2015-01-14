@@ -5,19 +5,22 @@ import com.onarandombox.multiverseinventories.api.profile.GlobalProfile;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Default implementation of global player profiles.
  */
 class DefaultGlobalProfile implements GlobalProfile {
 
-    private final String name;
+    //private final String name;
+    private final UUID uuid;
     private String lastWorld = null;
     private boolean loadOnLogin = false;
     //private ProfileType profileType = ProfileTypes.SURVIVAL;
 
-    DefaultGlobalProfile(String playerName, Map<String, Object> playerData) {
-        this.name = playerName;
+    DefaultGlobalProfile(UUID playerUUID, Map<String, Object> playerData) {
+        this.uuid = playerUUID;
+        //this.name = playerName;
         for (String key : playerData.keySet()) {
             if (key.equalsIgnoreCase(DataStrings.PLAYER_LAST_WORLD)) {
                 this.lastWorld = playerData.get(key).toString();
@@ -27,9 +30,14 @@ class DefaultGlobalProfile implements GlobalProfile {
         }
     }
 
-    @Override
+    /*@Override
     public String getName() {
         return this.name;
+    }*/
+
+    @Override
+    public UUID getUniqueId() {
+        return this.uuid;
     }
 
     @Override

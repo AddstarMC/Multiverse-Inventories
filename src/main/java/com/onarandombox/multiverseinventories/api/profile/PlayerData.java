@@ -1,5 +1,7 @@
 package com.onarandombox.multiverseinventories.api.profile;
 
+import java.util.UUID;
+
 /**
  * Interface for interacting with the persisted data of this plugin.
  */
@@ -19,11 +21,11 @@ public interface PlayerData {
      * @param containerType The type of container this profile is part of, world or group.
      * @param dataName   World/Group to retrieve from.
      * @param profileType The type of profile to load data for, typically based on game mode.
-     * @param playerName Player to retrieve for.
+     * @param playerUUID Player to retrieve for.
      * @return The player as returned from data.  If no data was found, a new PlayerProfile will be
      *         created.
      */
-    PlayerProfile getPlayerData(ContainerType containerType, String dataName, ProfileType profileType, String playerName);
+    PlayerProfile getPlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUID);
 
     /**
      * Removes the persisted data for a player for a specific world profile.
@@ -32,18 +34,18 @@ public interface PlayerData {
      * @param dataName   The name of the world/group the player's data is associated with.
      * @param profileType The type of profile we're removing, as per {@link ProfileType}.  If null, this will remove
      *                    remove all profile types.
-     * @param playerName The name of the player whose data is being removed.
+     * @param playerUUID The UUID of the player whose data is being removed.
      * @return True if successfully removed.
      */
-    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, String playerName);
+    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUD);
 
     /**
      * Retrieves the GlobalProfile for a player which contains Multiverse-Inventories meta-data for the player.
      *
-     * @param playerName The name of player to retrieve for.
+     * @param playerUUID The UUID of player to retrieve for.
      * @return The global profile for the specified player.
      */
-    GlobalProfile getGlobalProfile(String playerName);
+    GlobalProfile getGlobalProfile(UUID playerUUID);
 
     /**
      * Update the file for a player's global profile.
@@ -56,18 +58,18 @@ public interface PlayerData {
     /**
      * A convenience method to update the GlobalProfile of a player with a specified world.
      *
-     * @param playerName The player whose global profile this will update.
+     * @param playerUUID The player whose global profile this will update.
      * @param worldName The world to update the global profile with.
      */
-    void updateWorld(String playerName, String worldName);
+    void updateWorld(UUID playerUUID, String worldName);
 
     /**
      * A convenience method for setting whether player data should be loaded on login for the specified player.
      *
-     * @param playerName The player whose data should be loaded.
+     * @param playerUUID The player whose data should be loaded.
      * @param loadOnLogin Whether or not to load on login.
      */
-    void setLoadOnLogin(String playerName, boolean loadOnLogin);
+    void setLoadOnLogin(UUID playerUUID, boolean loadOnLogin);
 
     //void updateProfileType(String playerName, ProfileType profileType);
 }
