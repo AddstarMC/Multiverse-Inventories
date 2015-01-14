@@ -56,10 +56,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <repoosistory>
+        <reposistory>
             <id>maven-central</id>
             <url>http://repo1.maven.org/maven2/</url>
-        </repoosistory>
+        </repository>
     </repositories>
 
     <pluginRepositories>
