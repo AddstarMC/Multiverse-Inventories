@@ -360,7 +360,6 @@ and adjust the build number accordingly -->
             <scope>compile</scope>
         </dependency>
         <!-- End of jsonsmart Dependency -->
-        <!-- Start of Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
