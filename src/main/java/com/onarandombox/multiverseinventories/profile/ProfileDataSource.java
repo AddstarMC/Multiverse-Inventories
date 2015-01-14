@@ -1,7 +1,6 @@
 package com.onarandombox.multiverseinventories.profile;
 
 import com.onarandombox.multiverseinventories.profile.container.ContainerType;
-
 import java.io.IOException;
 import java.util.UUID;
 
@@ -40,12 +39,12 @@ public interface ProfileDataSource {
      * @param playerName The name of the player whose data is being removed.
      * @return True if successfully removed.
      */
-    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, String playerName);
+    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUD);
 
     /**
      * Retrieves the global profile for a player which contains meta-data for the player.
      *
-     * @param playerName The name of player to retrieve for.
+     * @param playerUUID The UUID of player to retrieve for.
      * @return The global profile for the specified player.
      * @deprecated UUID must be supported now.
      */
@@ -72,18 +71,19 @@ public interface ProfileDataSource {
     /**
      * A convenience method to update the GlobalProfile of a player with a specified world.
      *
-     * @param playerName The player whose global profile this will update.
+     * @param playerUUID The player whose global profile this will update.
      * @param worldName The world to update the global profile with.
      */
     void updateLastWorld(String playerName, String worldName);
+    void updateLastWorld(UUID playerUUID, String worldName);
 
     /**
      * A convenience method for setting whether player data should be loaded on login for the specified player.
      *
-     * @param playerName The player whose data should be loaded.
+     * @param playerUUID The player whose data should be loaded.
      * @param loadOnLogin Whether or not to load on login.
      */
-    void setLoadOnLogin(String playerName, boolean loadOnLogin);
+    void setLoadOnLogin(UUID playerUUID, boolean loadOnLogin);
 
     /**
      * Copies all the data belonging to oldName to newName and removes the old data.

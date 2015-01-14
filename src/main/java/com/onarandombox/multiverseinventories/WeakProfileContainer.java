@@ -91,13 +91,13 @@ final class WeakProfileContainer implements ProfileContainer {
     @Override
     public void removeAllPlayerData(OfflinePlayer player) {
         this.getPlayerData(player.getName()).clear();
-        this.getDataSource().removePlayerData(getContainerType(), getContainerName(), null, player.getName());
+        this.getDataSource().removePlayerData(getContainerType(), getContainerName(), null, player.getUniqueId());
     }
 
     @Override
     public void removePlayerData(ProfileType profileType, OfflinePlayer player) {
         this.getPlayerData(player.getName()).remove(profileType);
-        this.getDataSource().removePlayerData(getContainerType(), getContainerName(), profileType, player.getName());
+        this.getDataSource().removePlayerData(getContainerType(), getContainerName(), profileType, player.getUniqueId());
     }
 
     @Override

@@ -135,7 +135,7 @@ public class InventoriesListener implements Listener {
             ShareHandler.updatePlayer(inventories, player, new DefaultPersistingProfile(Sharables.allOf(),
                     inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player)));
         }
-        inventories.getData().setLoadOnLogin(player.getName(), false);
+        inventories.getData().setLoadOnLogin(player.getUniqueId(), false);
         verifyCorrectWorld(player, player.getWorld().getName(), globalProfile);
     }
 
@@ -148,23 +148,23 @@ public class InventoriesListener implements Listener {
     public void playerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         final String world = event.getPlayer().getWorld().getName();
-        inventories.getData().updateLastWorld(player.getName(), world);
+        inventories.getData().updateLastWorld(player.getUniqueId(), world);
         if (inventories.getMVIConfig().usingLoggingSaveLoad()) {
             ShareHandler.updateProfile(inventories, player, new DefaultPersistingProfile(Sharables.allOf(),
                     inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player)));
-            inventories.getData().setLoadOnLogin(player.getName(), true);
+            inventories.getData().setLoadOnLogin(player.getUniqueId(), true);
         }
     }
 
     private void verifyCorrectWorld(Player player, String world, GlobalProfile globalProfile) {
         if (globalProfile.getLastWorld() == null) {
-            inventories.getData().updateLastWorld(player.getName(), world);
+            inventories.getData().updateLastWorld(player.getUniqueId(), world);
         } else {
             if (!world.equals(globalProfile.getLastWorld())) {
                 Logging.fine("Player did not spawn in the world they were last reported to be in!");
                 new WorldChangeShareHandler(this.inventories, player,
                         globalProfile.getLastWorld(), world).handleSharing();
-                inventories.getData().updateLastWorld(player.getName(), world);
+                inventories.getData().updateLastWorld(player.getUniqueId(), world);
             }
         }
     }
@@ -207,7 +207,7 @@ public class InventoriesListener implements Listener {
         }
 
         new WorldChangeShareHandler(this.inventories, player, fromWorld.getName(), toWorld.getName()).handleSharing();
-        inventories.getData().updateLastWorld(player.getName(), toWorld.getName());
+        inventories.getData().updateLastWorld(player.getUniqueId(), toWorld.getName());
     }
 
     /**
