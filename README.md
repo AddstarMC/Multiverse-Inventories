@@ -1,4 +1,11 @@
-## Multiverse-Inventories is no longer supported. We highly recommend switching to [Per World Inventory](https://www.spigotmc.org/resources/per-world-inventory.4482/) which supports importing your inventories from Multiverse-Inventories.
+# Multiverse-Inventories
+
+A fork of the original Multiverse-Inventories plugin with UUID support.
+
+There is no automatic conversion from names to uuids and **all inventories will be lost**.
+To prevent this, you can [convert the files manually](https://github.com/RedstonerServer/old-name-converter).
+
+-----
 
 Copyright (c) 2011, The Multiverse Team All rights reserved.
 
