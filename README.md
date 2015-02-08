@@ -1,3 +1,12 @@
+# Multiverse-Inventories
+
+A fork of the original Multiverse-Inventories plugin with UUID support.
+
+There is no automatic conversion from names to uuids and **all inventories will be lost**.
+To prevent this, you can [convert the files manually](https://github.com/RedstonerServer/old-name-converter).
+
+-----
+
 Copyright (c) 2011, The Multiverse Team All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
