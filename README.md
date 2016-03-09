@@ -5,7 +5,7 @@ A fork of the original Multiverse-Inventories plugin with UUID support.
 There is no automatic conversion from names to uuids and **all inventories will be lost**.
 To prevent this, you can [convert the files manually](https://github.com/RedstonerServer/old-name-converter).
 
-If you wish to convert back from the UUID files back to username based MV-I 2.5 use this script to convert manually:
+If you wish to convert back from the UUID files back to username based MV-I 2.5 use this script to [convert manually]
 (https://github.com/hockeymikey/DarkStar-Converter).
 
 -----
