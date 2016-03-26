@@ -409,11 +409,12 @@ public class DataStrings {
                     continue;
                 }
                 if (index == -1) {
-                    Logging.warning("Invalid key: " + entry.getKey() + " while parsing inventory");
+                    Logging.warning("Invalid key: " + entry.getKey() + " while parsing inventory; index == -1");
                     continue;
                 }
-                if (index > inventorySize) {
-                    Logging.warning("Invalid key: " + entry.getKey() + " while parsing inventory");
+                if (index >= inventorySize) {
+                    Logging.warning("Invalid key: " + entry.getKey() + " while parsing inventory; " +
+                            "index >= inventorySize (" + index + " >= " + inventorySize + ")");
                     continue;
                 }
                 try {
