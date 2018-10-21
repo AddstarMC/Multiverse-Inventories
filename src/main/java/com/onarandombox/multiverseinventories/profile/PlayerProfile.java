@@ -20,14 +20,6 @@ public final class PlayerProfile implements Cloneable, Iterable<SharableEntry> {
         return new PlayerProfile(containerType, containerName, profileType, player);
     }
 
-    /**
-     * @deprecated Needs to use UUID for players
-     */
-    @Deprecated
-    public static PlayerProfile createPlayerProfile(ContainerType containerType, String containerName,
-                                                    ProfileType profileType, String playerName) {
-        return new PlayerProfile(containerType, containerName, profileType, Bukkit.getOfflinePlayer(playerName));
-    }
 
     private Map<Sharable, SharableEntry> data = new HashMap<Sharable, SharableEntry>();
 

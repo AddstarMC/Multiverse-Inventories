@@ -135,7 +135,7 @@ public class InventoriesListener implements Listener {
             Logging.info("BUK INV PRE:" + player.getInventory().toString());
             ShareHandler.updatePlayer(inventories, player, new DefaultPersistingProfile(Sharables.allOf(),
                     inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player)));
-            Logging.info("MVINV: " + inventories.getWorldManager().getWorldProfile(world).getPlayerData(player).toString());
+            Logging.info("MVINV: " + inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player).toString());
             Logging.info("BUK INV POST:" + player.getInventory().toString());
         }
         inventories.getData().setLoadOnLogin(player.getUniqueId(), false);

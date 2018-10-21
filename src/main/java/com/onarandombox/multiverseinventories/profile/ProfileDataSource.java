@@ -36,10 +36,10 @@ public interface ProfileDataSource {
      * @param dataName   The name of the world/group the player's data is associated with.
      * @param profileType The type of profile we're removing, as per {@link ProfileType}.  If null, this will remove
      *                    remove all profile types.
-     * @param playerName The name of the player whose data is being removed.
+     * @param playerUUID The name of the player whose data is being removed.
      * @return True if successfully removed.
      */
-    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUD);
+    boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUID);
 
     /**
      * Retrieves the global profile for a player which contains meta-data for the player.
@@ -49,7 +49,7 @@ public interface ProfileDataSource {
      * @deprecated UUID must be supported now.
      */
     @Deprecated
-    GlobalProfile getGlobalProfile(String playerName);
+    GlobalProfile getGlobalProfile(UUID playerUUID);
 
     /**
      * Retrieves the global profile for a player which contains meta-data for the player.
@@ -74,7 +74,6 @@ public interface ProfileDataSource {
      * @param playerUUID The player whose global profile this will update.
      * @param worldName The world to update the global profile with.
      */
-    void updateLastWorld(String playerName, String worldName);
     void updateLastWorld(UUID playerUUID, String worldName);
 
     /**

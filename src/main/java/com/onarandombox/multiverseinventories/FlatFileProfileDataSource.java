@@ -22,7 +22,6 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -281,6 +280,11 @@ class FlatFileProfileDataSource implements ProfileDataSource {
         return getPlayerData(ProfileKey.createProfileKey(containerType, dataName, profileType, playerUUID));
     }
 
+    @Override
+    public boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, UUID playerUUD) {
+        return false;
+    }
+
     private PlayerProfile deserializePlayerProfile(ProfileKey pKey, Map playerData) {
         PlayerProfile profile = PlayerProfile.createPlayerProfile(pKey.getContainerType(), pKey.getDataName(),
                 pKey.getProfileType(), Bukkit.getOfflinePlayer(pKey.getPlayerUUID()));
@@ -372,7 +376,6 @@ class FlatFileProfileDataSource implements ProfileDataSource {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean removePlayerData(ContainerType containerType, String dataName, ProfileType profileType, String playerName) {
         if (profileType == null) {
             try {
@@ -420,10 +423,9 @@ class FlatFileProfileDataSource implements ProfileDataSource {
         return resultMap;
     }
 
-    @Override
-    @Deprecated
-    public GlobalProfile getGlobalProfile(String playerName) {
-        return getGlobalProfile(playerName, Bukkit.getOfflinePlayer(playerName).getUniqueId());
+    public GlobalProfile getGlobalProfile(UUID playerUUID) {
+        String playerName = Bukkit.getOfflinePlayer(playerUUID).getName();
+        return getGlobalProfile(playerName, playerUUID);
     }
 
     @Override
@@ -440,7 +442,7 @@ class FlatFileProfileDataSource implements ProfileDataSource {
         } catch (IOException e) {
             // This won't ever happen
             e.printStackTrace();
-            return GlobalProfile.createGlobalProfile(playerName);
+            return GlobalProfile.createGlobalProfile(playerName,Bukkit.getOfflinePlayer(playerName).getUniqueId());
         }
         if (playerFile.exists()) {
             GlobalProfile profile = loadGlobalProfile(playerFile, playerName, playerUUID);
@@ -527,21 +529,19 @@ class FlatFileProfileDataSource implements ProfileDataSource {
     }
 
     @Override
-    @Deprecated
-    // TODO replace for UUID
-    public void updateLastWorld(String playerName, String worldName) {
-        GlobalProfile globalProfile = getGlobalProfile(playerName);
+    public void updateLastWorld( UUID playerUUID, String worldName) {
+        GlobalProfile globalProfile = getGlobalProfile(null,playerUUID);
         globalProfile.setLastWorld(worldName);
         updateGlobalProfile(globalProfile);
+
     }
 
     @Override
-    @Deprecated
-    // TODO replace for UUID
-    public void setLoadOnLogin(final String playerName, final boolean loadOnLogin) {
-        final GlobalProfile globalProfile = getGlobalProfile(playerName);
+    public void setLoadOnLogin(UUID playerUUID, boolean loadOnLogin) {
+        final GlobalProfile globalProfile = getGlobalProfile(playerUUID);
         globalProfile.setLoadOnLogin(loadOnLogin);
         updateGlobalProfile(globalProfile);
+
     }
 
     @Override
