@@ -145,6 +145,7 @@ class DefaultPlayerProfile implements PlayerProfile {
         }
         for (Object key : jsonStats.keySet()) {
             Sharable sharable = ProfileEntry.lookup(true, key.toString());
+
             if (sharable != null) {
                 this.data.put(sharable, sharable.getSerializer().deserialize(jsonStats.get(key).toString()));
             } else {
